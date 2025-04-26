@@ -16,7 +16,6 @@ export default function MedicineDetailPage({ id }: { id: string }) {
         const contentObj = JSON.parse(data.content);
         setFiles(contentObj);
         console.log(typeof contentObj);
-        
     });
   }, []);
 
