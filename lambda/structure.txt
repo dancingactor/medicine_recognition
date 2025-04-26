@@ -4,6 +4,13 @@
 └──────────────┘            └─────┬────────┘
                                   │InvokeAgent  /  InvokeFlow
                                   ▼
+                            ┌──────────────┐
+                            │ Lambda:      │
+                            │ get image from
+                            | s3 url       │
+                            └──────────────┘
+                                  │
+                                  │
                            ┌──────────────┐
                            │ Bedrock Flow │◄─┐   (optional visual workflow)
                            └─────┬────────┘  │InvokeFlow
@@ -25,9 +32,9 @@
                                   │   │ metrics-svc  │
                                   │   └──────────────┘
                                   │
-┌──────────────┐  PutObject  ┌──────────────┐  S3 events  ┌──────────────┐
-│   ICAM Edge  │────────────►│   S3 Bucket  │────────────►│ EventBridge  │──► alert StepFn / Lambda
-│ capture.py   │             │  factory-data│             └──────────────┘
+┌──────────────┐  PutObject  ┌──────────────┐
+│   ICAM Edge  │────────────►│   S3 Bucket  |
+│ capture.py   │             │  factory-data│
 │  (JPEG+JSON) │             │  raw/        │
 └──────────────┘             │  inference/  │
                              └─────▲────────┘
