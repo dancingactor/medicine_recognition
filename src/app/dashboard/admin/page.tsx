@@ -189,7 +189,7 @@ export default function UserDashboard() {
       <h1 className="text-2xl font-semibold text-gray-900">生產道詳情</h1>
       
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {/* 卡片 1 - 我的訂單 */}
+        {/* 生產道 */}
         {production_path.map((path) => (
           <Link href={`/dashboard/admin/1`} key={path.id} className="block hover:shadow-lg transition-shadow duration-300">
             <div className="bg-white overflow-hidden shadow rounded-lg">
