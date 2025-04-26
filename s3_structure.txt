@@ -1,18 +1,17 @@
 .
 ├── batch_result.json
 ├── batch1/
-│   ├── 1.json
-│   ├── 2.json
-│   ├── 3.json
-│   ├── ...
+│   ├── 1.json    anomaly: abc
+│   ├── 2.json    anomaly: edf     -> llm: 12345678
+│   └── 3.json    anomaly: hijk
 ├── batch2/
-│   ├── 1.json
-│   ├── 2.json
-│   ├── 3.json
-│   ├── ...
+│   ├── 4.json
+│   ├── 5.json
+│   ├── 6.json
+│   └── ...
 ├── batch3/
 ├── ...
-├── ...
+└── ...
 
 
 

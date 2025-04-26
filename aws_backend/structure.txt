@@ -1,25 +1,27 @@
-┌──────────────┐   HTTPS    ┌──────────────┐
-│  Frontend UI │───────────►│ API Gateway  │
-│ (React / Vue)│            │   /chat      │
-└──────────────┘            └─────┬────────┘
-                                  │InvokeAgent  /  InvokeFlow
-                                  ▼
-                           ┌──────────────┐
-                           │  Bedrock     │
-                           │   Agent      │
-                           └──────┬───────┘
-                                  │ SELECT / GetObject (Athena) 
-                                  ▼
-                           ┌──────────────┐
-                           │              │
-                           │    Athena    │
-                           │              │
-                           └──────┬───────┘
-                                  │ 
-                                  ▼
-┌──────────────┐  PutObject  ┌──────────────┐
-│   ICAM Edge  │────────────►│   S3 Bucket  |
+                            ┌──────────────┐
+                            │ Lambda       │
+                            │   /chat      │⭠──────────────────────
+                            └─────┬────────┘                       │
+                                  │InvokeAgent  /  InvokeFlow      │
+                                  ▼                                │
+                           ┌──────────────┐                        │
+                           │  Bedrock     │                        │
+                           │   Agent      │                        │ lambda scheduled requests
+                           │   workflow   │                        │ from lambda to s3 bucket
+                           └──────────────┘                        │
+                                  ▲                                │ defect_rate is from s3 
+                                  │                                │ bucket to lambda
+                                  ▼                                │
+┌──────────────┐  PutObject  ┌──────────────┐                      │
+│   ICAM Edge  │────────────►│   S3 Bucket  |⭠─────────────────────
 │ capture.py   │             │  factory-data│
 │  (JPEG+JSON) │             │  raw/        │
 └──────────────┘             │  inference/  │
                              └──────────────┘
+                                   ▲
+                                   │
+                                   ▼
+                             ┌──────────────┐
+                             │  Frontend UI │
+                             │ (React / Vue)│
+                             └──────────────┘     
