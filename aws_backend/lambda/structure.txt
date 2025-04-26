@@ -5,26 +5,21 @@
                                   │InvokeAgent  /  InvokeFlow
                                   ▼
                            ┌──────────────┐
-    ┌─────────────┐  creds │  Bedrock     │
-    │ Cognito/IAM │◄──────►│   Agent      │
-    └─────────────┘        └──────┬───────┘
-                                  │
+                           │  Bedrock     │
+                           │   Agent      │
+                           └──────┬───────┘
+                                  │ SELECT / GetObject (Athena) 
                                   ▼
                            ┌──────────────┐
-                           │ Lambda:      │
-                           │  call SQL    │
-                           │(e.g., SELECT)│
+                           │              │
+                           │    Athena    │
+                           │              │
                            └──────┬───────┘
                                   │ 
-                                  │
+                                  ▼
 ┌──────────────┐  PutObject  ┌──────────────┐
 │   ICAM Edge  │────────────►│   S3 Bucket  |
 │ capture.py   │             │  factory-data│
 │  (JPEG+JSON) │             │  raw/        │
 └──────────────┘             │  inference/  │
-                             └─────▲────────┘
-                                   │SELECT / GetObject (Athena)           
-                                   ▼
-                             ┌──────────────┐
-                             │   Athena     │
                              └──────────────┘
