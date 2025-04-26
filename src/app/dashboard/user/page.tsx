@@ -104,6 +104,8 @@ export default function UserDashboard() {
   }, []);
 
 
+
+
   
   // 模擬從API獲取數據
   useEffect(() => {
@@ -178,16 +180,16 @@ export default function UserDashboard() {
             </div>
             <div className="bg-gray-50 px-5 py-3">
               <div className="text-sm text-center">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  查看所有訂單
-                </a>
+                <div className="font-medium text-indigo-600 hover:text-indigo-500">
+                  破損率 64%
+                </div>
               </div>
             </div>
           </div>
         </Link>
 
         {/* 卡片 2 - 我的收藏 */}
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        {/* <div className="bg-white overflow-hidden shadow rounded-lg">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0 bg-pink-500 rounded-md p-3">
@@ -207,13 +209,13 @@ export default function UserDashboard() {
           </div>
           <div className="bg-gray-50 px-5 py-3">
             <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">查看收藏列表</a>
+              <Link href="#" className="font-medium text-indigo-600 hover:text-indigo-500">查看收藏列表</Link>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* 卡片 3 - 優惠券 */}
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        {/* <div className="bg-white overflow-hidden shadow rounded-lg">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0 bg-purple-500 rounded-md p-3">
@@ -233,20 +235,20 @@ export default function UserDashboard() {
           </div>
           <div className="bg-gray-50 px-5 py-3">
             <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">查看所有優惠券</a>
+              <Link href="#" className="font-medium text-indigo-600 hover:text-indigo-500">查看所有優惠券</Link>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* 最近訂單 */}
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <h2 className="text-lg leading-6 font-medium text-gray-900">最近訂單</h2>
         <div className="mt-2 bg-white shadow overflow-hidden sm:rounded-md">
           <ul className="divide-y divide-gray-200">
             {[1, 2, 3].map((item) => (
               <li key={item}>
-                <a href="#" className="block hover:bg-gray-50">
+                <Link href="#" className="block hover:bg-gray-50">
                   <div className="px-4 py-4 sm:px-6">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium text-indigo-600 truncate">
@@ -274,15 +276,15 @@ export default function UserDashboard() {
                       </div>
                     </div>
                   </div>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
-      </div>
+      </div> */}
 
       {/* 推薦商品 */}
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <h2 className="text-lg leading-6 font-medium text-gray-900">為您推薦</h2>
         <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3, 4].map((item) => (
@@ -300,6 +302,7 @@ export default function UserDashboard() {
             </div>
           ))}
         </div>
+      </div> */}
       </div>
     </DashboardLayout>
   );
