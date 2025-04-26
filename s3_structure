@@ -1,0 +1,41 @@
+.
+├── batch_result.json
+
+
+
+├── .gitignore
+├── aws_backend/
+│   ├── README.md
+│   ├── first.py
+│   ├── get_image_from_s3.py
+│   ├── s3/
+│   ├── structure.txt
+│   └── test_get_image_from_s3.py
+├── eslint.config.mjs
+├── lambda/
+│   └── get_image_from_s3.py
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── README.md
+├── s3_structure.txt
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── dashboard/
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── login/
+│   │   └── page.tsx
+│   └── component/
+│       ├── ClientDetailPage.tsx
+│       └── layout/
+└── tsconfig.json
