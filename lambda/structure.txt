@@ -1,0 +1,38 @@
+┌──────────────┐   HTTPS    ┌──────────────┐
+│  Frontend UI │───────────►│ API Gateway  │
+│ (React / Vue)│            │   /chat      │
+└──────────────┘            └─────┬────────┘
+                                  │InvokeAgent  /  InvokeFlow
+                                  ▼
+                           ┌──────────────┐
+                           │ Bedrock Flow │◄─┐   (optional visual workflow)
+                           └─────┬────────┘  │InvokeFlow
+                                  │          │
+                                  ▼          │
+                           ┌──────────────┐  │
+    ┌─────────────┐  creds │  Bedrock     │  │
+    │ Cognito/IAM │◄──────►│   Agent      │──┘
+    └─────────────┘        └─────┬────────┘
+                                  │Query / CallAction
+                                  ▼
+                           ┌──────────────┐
+                           │ KB (VectorDB)│
+                           └─────┬────────┘
+                                  │S3-sync  │Athena / Lambda metrics
+                                  │         ▼
+                                  │   ┌──────────────┐
+                                  │   │ Lambda:      │
+                                  │   │ metrics-svc  │
+                                  │   └──────────────┘
+                                  │
+┌──────────────┐  PutObject  ┌──────────────┐  S3 events  ┌──────────────┐
+│   ICAM Edge  │────────────►│   S3 Bucket  │────────────►│ EventBridge  │──► alert StepFn / Lambda
+│ capture.py   │             │  factory-data│             └──────────────┘
+│  (JPEG+JSON) │             │  raw/        │
+└──────────────┘             │  inference/  │
+                             └─────▲────────┘
+                                   │SELECT / GetObject (Athena)           
+                                   ▼
+                             ┌──────────────┐
+                             │   Athena     │
+                             └──────────────┘
