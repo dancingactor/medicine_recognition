@@ -1,0 +1,45 @@
+┌──────────────┐   HTTPS    ┌──────────────┐
+│  Frontend UI │───────────►│ API Gateway  │
+│ (React / Vue)│            │   /chat      │
+└──────────────┘            └─────┬────────┘
+                                  │InvokeAgent  /  InvokeFlow
+                                  ▼
+                            ┌──────────────┐
+                            │ Lambda:      │
+                            │ get image from
+                            | s3 url       │
+                            └──────────────┘
+                                  │
+                                  │
+                           ┌──────────────┐
+                           │ Bedrock Flow │◄─┐   (optional visual workflow)
+                           └─────┬────────┘  │InvokeFlow
+                                  │          │
+                                  ▼          │
+                           ┌──────────────┐  │
+    ┌─────────────┐  creds │  Bedrock     │  │
+    │ Cognito/IAM │◄──────►│   Agent      │──┘
+    └─────────────┘        └─────┬────────┘
+                                  │Query / CallAction
+                                  ▼
+                           ┌──────────────┐
+                           │ KB (VectorDB)│
+                           └─────┬────────┘
+                                  │S3-sync  │Athena / Lambda metrics
+                                  │         ▼
+                                  │   ┌──────────────┐
+                                  │   │ Lambda:      │
+                                  │   │ metrics-svc  │
+                                  │   └──────────────┘
+                                  │
+┌──────────────┐  PutObject  ┌──────────────┐
+│   ICAM Edge  │────────────►│   S3 Bucket  |
+│ capture.py   │             │  factory-data│
+│  (JPEG+JSON) │             │  raw/        │
+└──────────────┘             │  inference/  │
+                             └─────▲────────┘
+                                   │SELECT / GetObject (Athena)           
+                                   ▼
+                             ┌──────────────┐
+                             │   Athena     │
+                             └──────────────┘
