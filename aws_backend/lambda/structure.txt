@@ -4,42 +4,22 @@
 └──────────────┘            └─────┬────────┘
                                   │InvokeAgent  /  InvokeFlow
                                   ▼
-                            ┌──────────────┐
-                            │ Lambda:      │
-                            │ get image from
-                            | s3 url       │
-                            └──────────────┘
-                                  │
-                                  │
                            ┌──────────────┐
-                           │ Bedrock Flow │◄─┐   (optional visual workflow)
-                           └─────┬────────┘  │InvokeFlow
-                                  │          │
-                                  ▼          │
-                           ┌──────────────┐  │
-    ┌─────────────┐  creds │  Bedrock     │  │
-    │ Cognito/IAM │◄──────►│   Agent      │──┘
-    └─────────────┘        └─────┬────────┘
-                                  │Query / CallAction
+                           │  Bedrock     │
+                           │   Agent      │
+                           └──────┬───────┘
+                                  │ SELECT / GetObject (Athena) 
                                   ▼
                            ┌──────────────┐
-                           │ KB (VectorDB)│
-                           └─────┬────────┘
-                                  │S3-sync  │Athena / Lambda metrics
-                                  │         ▼
-                                  │   ┌──────────────┐
-                                  │   │ Lambda:      │
-                                  │   │ metrics-svc  │
-                                  │   └──────────────┘
-                                  │
+                           │              │
+                           │    Athena    │
+                           │              │
+                           └──────┬───────┘
+                                  │ 
+                                  ▼
 ┌──────────────┐  PutObject  ┌──────────────┐
 │   ICAM Edge  │────────────►│   S3 Bucket  |
 │ capture.py   │             │  factory-data│
 │  (JPEG+JSON) │             │  raw/        │
 └──────────────┘             │  inference/  │
-                             └─────▲────────┘
-                                   │SELECT / GetObject (Athena)           
-                                   ▼
-                             ┌──────────────┐
-                             │   Athena     │
                              └──────────────┘
