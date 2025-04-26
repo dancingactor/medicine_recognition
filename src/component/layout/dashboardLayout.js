@@ -10,21 +10,14 @@ export default function DashboardLayout({ children, userRole }) {
   const router = useRouter();
 
   // 根據用戶角色定義不同的導航項目
-  const navigationItems = userRole === 'admin' 
-    ? [
+  const navigationItems = 
+    [
         { name: '儀表板', href: '/dashboard/admin', icon: 'HomeIcon' },
-        { name: '用戶管理', href: '/dashboard/admin/users', icon: 'UsersIcon' },
-        { name: '內容管理', href: '/dashboard/admin/content', icon: 'DocumentTextIcon' },
+        { name: '詢問機器人', href: '/dashboard/admin/content', icon: 'DocumentTextIcon' },
         { name: '系統設置', href: '/dashboard/admin/settings', icon: 'CogIcon' },
-        { name: '數據分析', href: '/dashboard/admin/analytics', icon: 'ChartBarIcon' },
-      ]
-    : [
-        { name: '儀表板', href: '/dashboard/user', icon: 'HomeIcon' },
-        { name: '個人資料', href: '/dashboard/user/profile', icon: 'UserIcon' },
-        { name: '我的訂單', href: '/dashboard/user/orders', icon: 'ShoppingBagIcon' },
-        { name: '收藏列表', href: '/dashboard/user/favorites', icon: 'HeartIcon' },
-        { name: '幫助中心', href: '/dashboard/user/help', icon: 'QuestionMarkCircleIcon' },
-      ];
+        { name: '歷史修改紀錄', href: '/dashboard/admin/analytics', icon: 'ChartBarIcon' },
+        { name: '帳號管理', href: '/dashboard/admin/users', icon: 'UsersIcon' },
+    ];
 
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">

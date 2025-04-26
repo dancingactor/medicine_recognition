@@ -12,8 +12,7 @@ export default function Login() {
     e.preventDefault();
     // 這裡添加您的登入邏輯
     // 假設登入成功，根據用戶角色導向不同頁面
-    const userRole = email.includes('admin') ? 'admin' : 'user';
-    router.push(`/dashboard/${userRole}`);
+    router.push(`/dashboard/admin`);
   };
 
   return (

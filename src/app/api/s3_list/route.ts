@@ -8,7 +8,7 @@ export async function GET() {
   const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
   const bucketName = process.env.AWS_S3_BUCKET;
   const sessionToken = process.env.AWS_SESSION_TOKEN; // Optional
-
+  // console.log(region, accessKeyId, secretAccessKey, bucketName, sessionToken)
   // Check if required environment variables are set
   
   if (!region || !accessKeyId || !secretAccessKey || !bucketName) {
@@ -24,8 +24,6 @@ export async function GET() {
     );
   }
 
-  
-  
   // Create S3 client with explicit credentials
   const client = new S3Client({
     region,

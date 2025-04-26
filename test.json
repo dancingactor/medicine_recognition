@@ -1,0 +1,37 @@
+{
+    "batch1": {
+        "DR": 8,
+        "total": 1020,
+        "T": 25,
+        "humidity": 50,
+        "start_time": "2023-11-08_00:10:00"
+    },
+    "batch2": {
+        "DR": 10,
+        "total": 930,
+        "T": 26,
+        "humidity": 40,
+        "start_time": "2023-11-08_00:10:20"
+    },
+    "batch3": {
+        "DR": 11,
+        "total": 1120,
+        "T": 24,
+        "humidity": 45,
+        "start_time": "2023-11-08_00:11:00"
+    },
+    "batch4": {
+        "DR": 9,
+        "total": 800,
+        "T": 29,
+        "humidity": 47,
+        "start_time": "2023-11-08_00:11:20"
+    },
+    "batch5": {
+        "DR": 13,
+        "total": 1153,
+        "T": 27,
+        "humidity": 51,
+        "start_time": "2023-11-08_00:11:40"
+    }
+}
