@@ -12,8 +12,8 @@
                                   ▲                                │ defect_rate is from s3 
                                   │                                │ bucket to lambda
                                   ▼                                │
-┌──────────────┐  PutObject  ┌──────────────┐                      │
-│   ICAM Edge  │────────────►│   S3 Bucket  |⭠─────────────────────
+┌──────────────┐  PutObject  ┌──────────────┐                      │ lambda save llm's output
+│   ICAM Edge  │────────────►│   S3 Bucket  |⭠───────────────────── to s3
 │ capture.py   │             │  factory-data│
 │  (JPEG+JSON) │             │  raw/        │
 └──────────────┘             │  inference/  │
