@@ -13,9 +13,9 @@
 ├── ...
 ├── ...
 ├── events/
-|   ├── batch3.txt
-|   ├── batch9.txt
-|   └── batch18.txt
+|   ├── batch3.json
+|   ├── batch9.json
+|   └── batch18.json
 └── ...
 
 
