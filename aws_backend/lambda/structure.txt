@@ -4,33 +4,18 @@
 └──────────────┘            └─────┬────────┘
                                   │InvokeAgent  /  InvokeFlow
                                   ▼
-                            ┌──────────────┐
-                            │ Lambda:      │
-                            │ get image from
-                            | s3 url       │
-                            └──────────────┘
-                                  │
-                                  │
                            ┌──────────────┐
-                           │ Bedrock Flow │◄─┐   (optional visual workflow)
-                           └─────┬────────┘  │InvokeFlow
-                                  │          │
-                                  ▼          │
-                           ┌──────────────┐  │
-    ┌─────────────┐  creds │  Bedrock     │  │
-    │ Cognito/IAM │◄──────►│   Agent      │──┘
-    └─────────────┘        └─────┬────────┘
-                                  │Query / CallAction
+    ┌─────────────┐  creds │  Bedrock     │
+    │ Cognito/IAM │◄──────►│   Agent      │
+    └─────────────┘        └──────┬───────┘
+                                  │
                                   ▼
                            ┌──────────────┐
-                           │ KB (VectorDB)│
-                           └─────┬────────┘
-                                  │S3-sync  │Athena / Lambda metrics
-                                  │         ▼
-                                  │   ┌──────────────┐
-                                  │   │ Lambda:      │
-                                  │   │ metrics-svc  │
-                                  │   └──────────────┘
+                           │ Lambda:      │
+                           │  call SQL    │
+                           │(e.g., SELECT)│
+                           └──────┬───────┘
+                                  │ 
                                   │
 ┌──────────────┐  PutObject  ┌──────────────┐
 │   ICAM Edge  │────────────►│   S3 Bucket  |
