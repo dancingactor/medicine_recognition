@@ -25,3 +25,5 @@
                              │  Frontend UI │
                              │ (React / Vue)│
                              └──────────────┘     
+
+                             Instruct me in detail how to set up a scheduled lambda to periodly fetch the data from the batch_result.json to get the defect rate and if defate rate exceeds the 0.3, it will get the description from that specific batch folder to summarize the description to form the prompt and invoke the bedrock workflow and input the prompt
