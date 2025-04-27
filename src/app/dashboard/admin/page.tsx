@@ -1,6 +1,6 @@
 "use client"
 import DashboardLayout from '@/component/layout/dashboardLayout'
-import { useState, useEffect, use, ReactNode } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import  Link  from 'next/link'
 
 
@@ -87,12 +87,6 @@ const CircularProgressBar: React.FC<{ percentage: number; size?: number; strokeW
   );
 };
 
-interface EventData {
-  lambda: string;
-  LLM: string;
-  [key: string]: any; // 允許其他可能的欄位
-}
-
 export default function UserDashboard() {
   const [orderData, setOrderData] = useState({
     total: 100,
@@ -104,37 +98,38 @@ export default function UserDashboard() {
 
   const [loading, setLoading] = useState(true);
 
+
   const [events, setEvents] = useState<{ conversations: { id: string; time: string }[] }>({ conversations: [] });
 
   
   const production_path = [
     {
       id: "1",
-      title: "生產道1",
+      title: "生產道A",
       description: "發現是溫度過高的問題",
       defection_rate: "10",
       total: "1000",
       defect_num: "100",
       time: "2025-04-26 14:30",
     },
-    {
-      id: "2",
-      title: "生產道2",
-      description: "發現是濕度過高，溫度過低的問題",
-      defection_rate: "40",
-      total: "4000",
-      defect_num: "1600",
-      time: "2025-04-26 10:00",
-    },
-    {
-      id: "3",
-      title: "生產道3",
-      description: "發現是某個儀器高度過低，導致在製藥的時候，壓力過高，倒置異常損壞",
-      defection_rate: "25",
-      total: "1600",
-      defect_num: "400",
-      time: "2025-04-25 16:45",
-    },
+    // {
+    //   id: "2",
+    //   title: "生產道2",
+    //   description: "發現是濕度過高，溫度過低的問題",
+    //   defection_rate: "40",
+    //   total: "4000",
+    //   defect_num: "1600",
+    //   time: "2025-04-26 10:00",
+    // },
+    // {
+    //   id: "3",
+    //   title: "生產道3",
+    //   description: "發現是某個儀器高度過低，導致在製藥的時候，壓力過高，倒置異常損壞",
+    //   defection_rate: "25",
+    //   total: "1600",
+    //   defect_num: "400",
+    //   time: "2025-04-25 16:45",
+    // },
   ];
 
 
@@ -145,12 +140,13 @@ export default function UserDashboard() {
       .then(data => {
         const contentObj = JSON.parse(data.content);
         setFiles(contentObj);
-        setLoading(false);
+        
     });
   }, []);
 
   useEffect(() => {
     if (files !== null) {
+      
       const latestBatch = Object.entries(files).reduce<{ key: string; value: any } | null>((latest, [key, value]) => {
         if (!latest || new Date((value as any).start_time) > new Date((latest.value as any).start_time)) {
           return { key, value };
@@ -200,6 +196,7 @@ export default function UserDashboard() {
       });
   }, []);
 
+
   return (
     <DashboardLayout userRole="user">
       <h1 className="text-2xl font-semibold text-gray-900">生產線詳情</h1>
@@ -239,7 +236,7 @@ export default function UserDashboard() {
               <div className="bg-gray-50 px-5 py-3">
                 <div className="text-sm text-center">
                   <div className="font-medium text-indigo-600 hover:text-indigo-500">
-                    破損率
+                    最新破損率
                   </div>
                 </div>
               </div>
@@ -248,10 +245,10 @@ export default function UserDashboard() {
         ))}
 
       </div>
-      <h1 className="text-2xl font-semibold text-gray-900 mt-10 mb-5">近期事件</h1>
+      <h1 className="text-2xl font-semibold text-gray-900 mt-10 mb-5">近期系統自動修正事件</h1>
       <div className="w-full mx-auto">
         <div className="flex flex-col gap-4">
-          {events.conversations.map((event: {
+          {!loading && events.conversations.map((event: {
             [x: string]: ReactNode; id: string; time: string 
 }) => (
             <Link
@@ -270,6 +267,9 @@ export default function UserDashboard() {
               </div>
             </Link>
           ))}
+          {loading && (
+            <div className='text-center text-black mt-20'>loading...</div>
+          )}
         </div>
       </div>
     </DashboardLayout>

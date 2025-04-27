@@ -43,11 +43,7 @@ export async function GET(request: Request) {
         async function downloadAllFiles() {
           try {
 
-            const listCommand = new ListObjectsV2Command({
-              Bucket: bucketName,
-              Prefix: directoryPrefix,
-            });
-            
+
             let isTruncated = true;
             let continuationToken = undefined;
             

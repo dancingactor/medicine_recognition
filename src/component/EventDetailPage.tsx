@@ -1,6 +1,8 @@
 "use client"
 import { useState, useEffect } from 'react';
 import DashboardLayout from './layout/dashboardLayout';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface EventData {
   lambda: string;
@@ -58,7 +60,8 @@ export default function EventDetail({ id }: { id: string }) {
           <h1 className="text-2xl font-bold mb-8 text-center text-gray-800">生產線事件詳情</h1>
           
           {event ? (
-            <div className="space-y-8">
+            <div>
+            <div className="space-y-8 mb-19">
               {/* 系統提示區塊 */}
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 bg-indigo-500 text-white rounded-full p-3">
@@ -68,7 +71,7 @@ export default function EventDetail({ id }: { id: string }) {
                 </div>
                 <div className="flex-1 bg-gray-50 rounded-lg p-6">
                   <h3 className="text-lg font-semibold mb-2 text-gray-700">系統</h3>
-                  <p className="text-gray-600 leading-relaxed">{event.lambda}</p>
+                  <ReactMarkdown >{event.lambda}</ReactMarkdown>
                 </div>
               </div>
 
@@ -81,9 +84,42 @@ export default function EventDetail({ id }: { id: string }) {
                 </div>
                 <div className="flex-1 bg-indigo-50 rounded-lg p-6">
                   <h3 className="text-lg font-semibold mb-2 text-gray-700">AI 回應</h3>
-                  <p className="text-gray-600 leading-relaxed">{event.LLM}</p>
+                    <ReactMarkdown >{event.LLM}</ReactMarkdown>
                 </div>
               </div>
+              {/* AI 回應區塊 */}
+              {/* 數據更改區塊 */}
+              
+            </div>
+            <div>
+
+              {/* 數據更改區塊 */}
+              <div className="bg-yellow-50 rounded-lg p-6 border-l-4 border-yellow-400">
+                <h3 className="text-lg font-semibold mb-4 text-gray-700 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                  數據更改摘要
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-600">溫度調整</span>
+                    <span className="font-medium text-yellow-600">從 27°C 調整至 25°C</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-600">濕度變化</span>
+                    <span className="font-medium text-yellow-600">從 51% 調整至 43%</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-600">預期改善</span>
+                    <span className="font-medium text-green-600">不良率預計下降 8%</span>
+                  </div>
+                </div>
+                <div className="mt-4 text-sm text-gray-500 italic">
+                  建議在調整後密切監控生產線狀況，觀察改善效果
+                </div>
+              </div>
+            </div>
             </div>
           ) : (
             <div className="text-center text-gray-500 py-12">

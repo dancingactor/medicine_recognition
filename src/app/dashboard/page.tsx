@@ -1,6 +1,6 @@
 export default function page(){
 
     return (
-        <div>dfdfd</div>
+        <div>it is dashboard</div>
     )
 }

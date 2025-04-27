@@ -13,10 +13,10 @@ export default function DashboardLayout({ children, userRole }) {
   const navigationItems = 
     [
         { name: '儀表板', href: '/dashboard/admin', icon: 'HomeIcon' },
-        { name: '詢問機器人', href: '/dashboard/admin/content', icon: 'DocumentTextIcon' },
-        { name: '系統設置', href: '/dashboard/admin/settings', icon: 'CogIcon' },
-        { name: '歷史修改紀錄', href: '/dashboard/admin/analytics', icon: 'ChartBarIcon' },
-        { name: '帳號管理', href: '/dashboard/admin/users', icon: 'UsersIcon' },
+        // { name: '詢問機器人', href: '/dashboard/admin/content', icon: 'DocumentTextIcon' },
+        // { name: '系統設置', href: '/dashboard/admin/settings', icon: 'CogIcon' },
+        { name: '歷史修改紀錄', href: '/history', icon: 'ChartBarIcon' },
+        { name: '帳號管理', href: '/history', icon: 'UsersIcon' },
     ];
 
   return (
