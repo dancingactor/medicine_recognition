@@ -6,7 +6,7 @@ export async function GET() {
   const region = process.env.AWS_DEFAULT_REGION; 
   const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
   const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
-  const bucketName = process.env.AWS_S3_BUCKET;
+  const bucketName = "medicine-recognition-system";
   const sessionToken = process.env.AWS_SESSION_TOKEN; // Optional
   // console.log(region, accessKeyId, secretAccessKey, bucketName, sessionToken)
   // Check if required environment variables are set

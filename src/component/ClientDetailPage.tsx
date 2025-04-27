@@ -110,7 +110,7 @@ export default function MedicineDetailPage({ id }: { id: string }) {
                           <div className="flex-1">
                             <div className="flex flex-col">
                               <span>總量: {value.total}</span>
-                              <span>不良率: {value.DR}%</span>
+                              <span>破損率: {value.DR}%</span>
                             </div>
                           </div>
                           {/* 查看詳情按鈕 */}

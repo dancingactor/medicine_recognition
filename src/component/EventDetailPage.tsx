@@ -112,7 +112,7 @@ export default function EventDetail({ id }: { id: string }) {
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">預期改善</span>
-                    <span className="font-medium text-green-600">不良率預計下降 8%</span>
+                    <span className="font-medium text-green-600">破損率預計下降 8%</span>
                   </div>
                 </div>
                 <div className="mt-4 text-sm text-gray-500 italic">
