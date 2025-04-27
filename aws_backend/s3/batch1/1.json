@@ -1,1 +1,4 @@
-{"anomaly": true, "description": "Temperature spike detected", "timestamp": "2025-04-26T13:45:00Z"}
+{
+    "anomaly": true, 
+    "timestamp": "2025-04-26T13:45:00Z"
+}
