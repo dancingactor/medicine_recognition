@@ -114,7 +114,7 @@ export default function UserDashboard() {
     },
     {
       id: "2",
-      title: "生產道2",
+      title: "生產道B",
       description: "發現是濕度過高，溫度過低的問題",
       defection_rate: "40",
       total: "4000",
@@ -123,7 +123,7 @@ export default function UserDashboard() {
     },
     {
       id: "3",
-      title: "生產道3",
+      title: "生產道C",
       description: "發現是某個儀器高度過低，導致在製藥的時候，壓力過高，倒置異常損壞",
       defection_rate: "25",
       total: "1600",
