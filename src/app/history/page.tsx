@@ -40,9 +40,9 @@ export default function historyFile(){
           });
       }, []);
       return (
-        <DashboardLayout userRole="user">
-          <h1 className="text-2xl font-semibold text-gray-900 mt-10 mb-5">系統自動修正事件</h1>
-          <div className="w-full mx-auto">
+        <DashboardLayout userRole="user ">
+          <h1 className="text-2xl font-semibold text-gray-900 mt-10 mb-5 text-black">系統自動修正事件</h1>
+          <div className="w-full mx-auto text-black">
             <div className="flex flex-col gap-4">
               {events.conversations.map((event: {
                 [x: string]: ReactNode; id: string; time: string 

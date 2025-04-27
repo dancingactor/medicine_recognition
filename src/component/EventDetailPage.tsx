@@ -55,7 +55,7 @@ export default function EventDetail({ id }: { id: string }) {
 
   return (
     <DashboardLayout userRole="user">
-      <div className="container mx-auto p-4 max-w-4xl">
+      <div className="container mx-auto p-4 max-w-4xl text-black">
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h1 className="text-2xl font-bold mb-8 text-center text-gray-800">生產線事件詳情</h1>
           

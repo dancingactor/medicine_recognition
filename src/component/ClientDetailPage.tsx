@@ -41,7 +41,7 @@ export default function MedicineDetailPage({ id }: { id: string }) {
 
   return (
     <DashboardLayout userRole="user">
-        <div className="p-6">
+        <div className="p-6 text-black">
           <h1 className="text-2xl font-bold mb-6">生產道 {id} 詳細情形</h1>
           { !loading && (
             <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4">
@@ -65,7 +65,7 @@ export default function MedicineDetailPage({ id }: { id: string }) {
             </div>
           
             {/* Block 2 & 3: 左下環境參數 + 右下時間軸 */}
-            <div className="w-full max-w-4xl flex flex-col md:flex-row gap-6">
+            <div className="w-full max-w-4xl flex flex-col md:flex-row gap-6 text-black">
               {/* Block 2: 環境參數 */}
               <div className="bg-white shadow rounded-lg p-6 flex-1 md:max-w-xs">
                 <h3 className="text-lg font-semibold mb-4">最新 batch 情況</h3>
@@ -94,7 +94,7 @@ export default function MedicineDetailPage({ id }: { id: string }) {
               </div>
           
               {/* Block 3: 時間軸（含圖片/影片） */}
-              <div className="bg-white shadow rounded-lg p-6 flex-1">
+              <div className="bg-white shadow rounded-lg p-6 flex-1 text-black">
                 <h3 className="text-lg font-semibold mb-4">歷史紀錄</h3>
                 <div className="flex flex-col gap-4">
                   {!loading && (
