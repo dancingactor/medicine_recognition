@@ -50,17 +50,16 @@ export default function MedicineDetailPage({ id }: { id: string }) {
               <div className="flex flex-col md:flex-row items-center gap-6">
                 {/* 藥物圖片 */}
                 <img
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80"
+                  src="/production_line.jpeg"
                   alt="藥物圖片"
                   className="w-36 h-36 object-cover rounded-lg border"
                 />
                 {/* 詳細資訊 */}
                 <div className="flex-1">
-                  <h2 className="text-2xl font-bold mb-2">藥物名稱：阿莫西林</h2>
-                  <p className="text-gray-700 mb-1">生產批號：AMX-20250425</p>
+                  <h2 className="text-2xl font-bold mb-2">生產線 A</h2>
+                  <p className="text-gray-700 mb-1">設備批號：AMX-20250425</p>
                   <p className="text-gray-700 mb-1">生產日期：2025-04-25</p>
-                  <p className="text-gray-700 mb-1">有效期限：2027-04-25</p>
-                  <p className="text-gray-700">生產線：A1</p>
+                  <p className="text-gray-700 mb-1">生產廠：新北五股區</p>
                 </div>
               </div>
             </div>
