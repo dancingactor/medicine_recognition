@@ -112,24 +112,24 @@ export default function UserDashboard() {
       defect_num: "100",
       time: "2025-04-26 14:30",
     },
-    // {
-    //   id: "2",
-    //   title: "生產道2",
-    //   description: "發現是濕度過高，溫度過低的問題",
-    //   defection_rate: "40",
-    //   total: "4000",
-    //   defect_num: "1600",
-    //   time: "2025-04-26 10:00",
-    // },
-    // {
-    //   id: "3",
-    //   title: "生產道3",
-    //   description: "發現是某個儀器高度過低，導致在製藥的時候，壓力過高，倒置異常損壞",
-    //   defection_rate: "25",
-    //   total: "1600",
-    //   defect_num: "400",
-    //   time: "2025-04-25 16:45",
-    // },
+    {
+      id: "2",
+      title: "生產道2",
+      description: "發現是濕度過高，溫度過低的問題",
+      defection_rate: "40",
+      total: "4000",
+      defect_num: "1600",
+      time: "2025-04-26 10:00",
+    },
+    {
+      id: "3",
+      title: "生產道3",
+      description: "發現是某個儀器高度過低，導致在製藥的時候，壓力過高，倒置異常損壞",
+      defection_rate: "25",
+      total: "1600",
+      defect_num: "400",
+      time: "2025-04-25 16:45",
+    },
   ];
 
 
