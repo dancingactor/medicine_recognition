@@ -1,68 +1,89 @@
-import os, json, boto3
-from statistics import mean
+import os
+import json
+import boto3
+from datetime import datetime
 
 s3  = boto3.client("s3")
 brt = boto3.client("bedrock-agent-runtime")
 
-BUCKET = os.environ["BUCKET"]
-PREFIX = os.environ["RESULT_PREFIX"]
+BUCKET    = os.environ["BUCKET"]
+PREFIX    = os.environ["RESULT_PREFIX"]
 THRESHOLD = float(os.environ["THRESHOLD"])
 
 def handler(event, _ctx):
-    # 1. List and pick the newest batch_result.json
-    resp = s3.list_objects_v2(Bucket=BUCKET, Prefix=PREFIX)
-    files = [o for o in resp.get("Contents", []) if o["Key"].endswith("batch_result.json")]
+    # 1. Pick the newest batch_result.json file
+    resp   = s3.list_objects_v2(Bucket=BUCKET, Prefix=PREFIX)
+    files  = [o for o in resp.get("Contents", []) if o["Key"].endswith("batch_result.json")]
     if not files:
         return {"error": "no batch_result.json found"}
     latest = max(files, key=lambda o: o["LastModified"])
-    key = latest["Key"]
+    key    = latest["Key"]
 
-    # 2. Read and parse
-    body = s3.get_object(Bucket=BUCKET, Key=key)["Body"].read()
-    try:
-        records = json.loads(body)
-        last = records[-1]
-    except (ValueError, IndexError):
-        # handle newline-delimited JSON
-        lines = body.decode().splitlines()
-        last = json.loads(lines[-1])
+    # 2. Read JSON and grab the batch with the latest start_time
+    body    = s3.get_object(Bucket=BUCKET, Key=key)["Body"].read()
+    records = json.loads(body)
 
-    defect_rate = float(last.get("DR") or last.get("defect_rate") or 0)
+    def parse_time(b):  # helper to convert string → datetime
+        return datetime.strptime(b["start_time"], "%Y-%m-%d %H:%M:%S")
 
-    # 3. Check threshold
+    batch_name, batch = max(records.items(), key=lambda kv: parse_time(kv[1]))
+
+    defect_rate = float(batch["DR"])
+    temperature = batch["T"]
+    humidity    = batch["humidity"]
+    start_time  = batch["start_time"]
+
+    # 3. If below threshold, finish early
     if defect_rate <= THRESHOLD:
-        return {"status":"OK", "latest_rate": defect_rate}
+        return {
+            "status": "OK",
+            "batch":  batch_name,
+            "defect_rate": defect_rate
+        }
 
-    # 4. Fetch description
-    folder = key.rsplit("/", 1)[0]
-    desc_key = f"{folder}/description.txt"
-    description = s3.get_object(Bucket=BUCKET, Key=desc_key)["Body"].read().decode()
-
-    # 5. Prepare prompt & invoke flow
+    # 4. Build prompt
     prompt = (
-        "You are a factory QA assistant. The latest batch exceeded the "
-        f"defect threshold of {THRESHOLD:.2f}. Defect rate: {defect_rate:.2f}. "
-        "Batch notes:\n\n" + description
-    )
+        "The defect-rate threshold is {:.2f}%. "
+        "Batch **{}** has:\n"
+        "• Defect rate: {:.2f}%\n"
+        "• Temperature: {} °C\n"
+        "• Humidity   : {} %\n"
+        "• Start time : {}\n\n"
+        "How can we adjust temperature or humidity to reduce defects?"
+    ).format(THRESHOLD, batch_name, defect_rate, temperature, humidity, start_time)
+
+    # 5. Invoke Bedrock Flow
     resp = brt.invoke_flow(
         flowIdentifier=os.environ["FLOW_ID"],
         flowAliasIdentifier=os.environ["FLOW_ALIAS"],
         inputs=[{
-          "content": {"document": prompt},
-          "nodeName": "FlowInput",
-          "nodeOutputName": "document"
+            "content": {"document": prompt},
+            "nodeName": "FlowInputNode",
+            "nodeOutputName": "document"
         }],
         enableTrace=True
     )
 
-    # 6. Collect & save summary
-    transcript = []
+    # 6. Collect LLM response
+    chunks = []
     for evt in resp["responseStream"]:
         if "flowOutputEvent" in evt:
-            transcript.append(evt["flowOutputEvent"]["content"]["document"])
-    final_txt = "".join(transcript)
+            chunks.append(evt["flowOutputEvent"]["content"]["document"])
+    llm_answer = "".join(chunks)
 
-    out_key = f"events/{folder.split('/')[-1]}.txt"
-    s3.put_object(Bucket=BUCKET, Key=out_key, Body=final_txt.encode())
+    # 7. Save prompt & answer as batchX.json under events/
+    out_key   = f"events/{batch_name}.json"
+    out_body  = json.dumps({
+        "lambda": prompt,
+        "LLM":    llm_answer,
+        "time":   start_time.replace(" ", "_")  # e.g. 2023-11-08_00:10:00
+    }, ensure_ascii=False, indent=2).encode()
 
-    return {"status":"OVER_THRESHOLD", "saved_to": out_key}
+    s3.put_object(Bucket=BUCKET, Key=out_key, Body=out_body)
+
+    return {
+        "status":       "OVER_THRESHOLD",
+        "saved_to":     out_key,
+        "batch":        batch_name,
+        "defect_rate":  defect_rate
+    }
