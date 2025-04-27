@@ -125,7 +125,7 @@ export default function EventDetail({ id }: { id: string }) {
             <div className="text-center text-gray-500 py-12">
               找不到對應的事件資料
             </div>
-          )}
+          )} 
         </div>
       </div>
     </DashboardLayout>
