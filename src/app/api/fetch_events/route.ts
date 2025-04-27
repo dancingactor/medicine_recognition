@@ -107,7 +107,8 @@ export async function GET(request: Request) {
             
           } catch (error) {
             console.error('error:', error);
-            return { success: false, error: error instanceof Error ? error.message : 'An unknown error occurred' };
+            const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+            return NextResponse.json({ success: false, error: errorMessage }, { status: 500 });
           }
         }
         
