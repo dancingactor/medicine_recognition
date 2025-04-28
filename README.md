@@ -3,8 +3,8 @@
 
 A production monitoring system designed for pill manufacturing. This system leverages [ICAM](https://www.advantech.com/en/products/ce666c81-b9fc-4675-b7aa-0c16ce758636/icam-540/mod_090d1ba9-cea5-4fb1-98ab-9029aeb0a7e7) for real-time defect detection and defection rate calculation
 <p align="center">
-  <img src="./demo_image/demo1.png" width="545"/>
-  <img src="./demo_image/demo2.jpg" width="300"/>
+  <img src="./demo_image/demo1.png" width="445"/>
+  <img src="./demo_image/demo2.jpg" width="250"/>
 </p>
 
 ## Features
