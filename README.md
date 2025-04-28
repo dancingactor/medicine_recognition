@@ -1,9 +1,9 @@
 # PILL DEFECT DETECTION AND MONITORING SYSTEM
 
 
-A production monitoring system designed for pill manufacturing. This system leverages [ICAM](https://www.advantech.com/en/products/ce666c81-b9fc-4675-b7aa-0c16ce758636/icam-540/mod_090d1ba9-cea5-4fb1-98ab-9029aeb0a7e7) for real-time defect detection and defection rate calculation
+A pill defect detection and monitoring system designed for pill manufacturing. This system leverages [ICAM](https://www.advantech.com/en/products/ce666c81-b9fc-4675-b7aa-0c16ce758636/icam-540/mod_090d1ba9-cea5-4fb1-98ab-9029aeb0a7e7) for real-time defect detection and and AWS Bedrock for AI-powered recommendations and automated problem resolution.
 <p align="center">
-  <img src="./demo_image/demo1.png" width="445"/>
+  <img src="./demo_image/demo1.png" width="450"/>
   <img src="./demo_image/demo2.jpg" width="250"/>
 </p>
 
