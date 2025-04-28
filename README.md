@@ -1,8 +1,11 @@
-# Pills Factory Admin Console
+# PILL DEFECT DETECTION AND MONITORING SYSTEM
 
-This website is our console for pills factory admin to examinate the pills' situation.  
-We aim at addressing the deficiency of worker in pills production.  
-We leverage the ability of ICAM to capture the defected pills and calculate the defection rate.
+
+A production monitoring system designed for pill manufacturing. This system leverages [ICAM](https://www.advantech.com/en/products/ce666c81-b9fc-4675-b7aa-0c16ce758636/icam-540/mod_090d1ba9-cea5-4fb1-98ab-9029aeb0a7e7) for real-time defect detection and defection rate calculation
+<p align="center">
+  <img src="./demo_image/demo1.png" width="350"/>
+  <img src="./demo_image/demo2.jpg" width="200"/>
+</p>
 
 ## Features
 
@@ -75,7 +78,3 @@ If you do not want to clone it, you can also access the Website  at [https://med
 ## License
 
 MIT
-
----
-
-*For any questions, please contact the project maintainer.*
